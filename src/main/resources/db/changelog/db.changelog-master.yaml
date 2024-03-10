@@ -1,0 +1,127 @@
+databaseChangeLog:
+  - logicalFilePath: db/changelog/db.changelog-lesson1.yaml
+  - changeSet:
+      id: "1"
+      author: your_liquibase_username
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login
+                  type: varchar(50)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(512)
+                  constraints:
+                    nullable: false
+            
+        - createTable:
+            tableName: cached_item
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(40)
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: data
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_used
+                  type: timestamp
+                  constraints:
+                    nullable: false
+            
+        - createTable:
+            tableName: user_authority
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: authority
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+
+        
+
+  - changeSet:
+      id: "2"
+      author: your_liquibase_username
+      comment: "Create admin user oper"
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: "1"
+              - column:
+                  name: login
+                  value: "admin"
+              - column:
+                  name: password
+                  value: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: "2"
+              - column:
+                  name: login
+                  value: "user"
+              - column:
+                  name: password
+                  value: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"
+
+
+        - insert:
+            tableName: user_authority
+            columns:
+              - column:
+                  name: user_id
+                  value: "1"
+              - column:
+                  name: authority
+                  value: "ROLE_ADMIN"
+        - insert:
+            tableName: user_authority
+            columns:
+              - column:
+                  name: user_id
+                  value: "2"
+              - column:
+                  name: authority
+                  value: "ROLE_POSTS_VIEWER"
+             
+      rollback:
+        - delete:
+            tableName: users
+            where: username in ('admin', 'guest')
+          
