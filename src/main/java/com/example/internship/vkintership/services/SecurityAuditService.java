@@ -16,16 +16,14 @@ import com.example.internship.vkintership.enums.AuditStatus;
 import com.example.internship.vkintership.repositories.SecurityAuditRepository;
 
 import lombok.var;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 public class SecurityAuditService {
     
     @Autowired
     private SecurityAuditRepository repository;
     @Autowired 
-    private UserService userService;
+    private SecurityUserService userService;
 
     public void createUserAction(AuditStatus status) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -33,14 +31,16 @@ public class SecurityAuditService {
         if (authentication != null && !authentication.getPrincipal().equals("anonymousUser")) {
             user = userService.getUserByLogin(((UserDetails) authentication.getPrincipal()).getUsername());
         }
-            
-        String requestUri = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest().getRequestURI();
-        if (requestUri.equals("/error")) return;
+        
+        var req = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+        String requestUri = req.getRequestURI();
+        String method = req.getMethod();
         SecurityAudit audit = SecurityAudit.builder()
                                             .status(status)
                                             .user(user)
                                             .timestamp(LocalDateTime.now())
                                             .requestUrl(requestUri)
+                                            .method(method)
                                             .build();
         repository.save(audit);
 

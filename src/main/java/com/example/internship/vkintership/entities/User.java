@@ -1,6 +1,5 @@
 package com.example.internship.vkintership.entities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.example.internship.vkintership.enums.UserAuthority;

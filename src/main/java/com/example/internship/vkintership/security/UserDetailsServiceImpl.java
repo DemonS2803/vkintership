@@ -9,19 +9,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.internship.vkintership.services.UserService;
+import com.example.internship.vkintership.services.SecurityUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
-@Slf4j
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 
     @Autowired
-    private UserService userService;
+    private SecurityUserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

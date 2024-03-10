@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.internship.vkintership.dto.AuthDTO;
 import com.example.internship.vkintership.entities.User;
 import com.example.internship.vkintership.security.JwtUtils;
-import com.example.internship.vkintership.services.UserService;
+import com.example.internship.vkintership.services.SecurityUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthController {
 
     @Autowired
-    private UserService userService;
+    private SecurityUserService userService;
     @Autowired
     private JwtUtils jwtUtils;
     @Autowired

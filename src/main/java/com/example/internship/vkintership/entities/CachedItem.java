@@ -2,14 +2,11 @@ package com.example.internship.vkintership.entities;
 
 import java.time.LocalDateTime;
 
-import com.example.internship.vkintership.enums.CachedItemType;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.JsonNode;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,8 +28,8 @@ public class CachedItem {
     @EmbeddedId
     private ItemTypeId id;
     private LocalDateTime lastUsed;
-    @Lob
-    private JsonNode data;
+    @Column(length = 10000)
+    private String data;
     
 }
 
