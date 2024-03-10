@@ -15,7 +15,6 @@ import com.example.internship.vkintership.entities.User;
 import com.example.internship.vkintership.enums.AuditStatus;
 import com.example.internship.vkintership.repositories.SecurityAuditRepository;
 
-import lombok.var;
 
 @Service
 public class SecurityAuditService {
