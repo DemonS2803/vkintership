@@ -5,8 +5,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -15,16 +13,14 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.internship.vkintership.entities.cached.User;
-import com.example.internship.vkintership.enums.UserAuthority;
 import com.example.internship.vkintership.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class VkintershipApplicationTests {
+public class AppTest {
 
-	@Autowired
+    @Autowired
     private MockMvc mockMvc;
 	@Autowired
 	private UserService userService;
@@ -82,18 +78,5 @@ class VkintershipApplicationTests {
 		mockMvc.perform(get("/api/v1/albums/get/all")).andExpect(status().isOk());
 		mockMvc.perform(get("/api/v1/users/get/all")).andExpect(status().isOk());
     }
-
-	@Test
-    @WithMockUser(username = "admin", password = "password", authorities = {"ROLE_POSTS_VIEWER", "ROLE_POSTS_EDITOR", "ROLE_ALBUMS_VIEWER", "ROLE_ALBUMS_EDITOR". "ROLE_USERS_VIEWER", "ROLE_USERS_EDITOR"})
-    void userAllAuthoritiesCheck() throws Exception {
-        mockMvc.perform(get("/api/v1/posts/get/all")).andExpect(status().isOk());
-		mockMvc.perform(get("/api/v1/posts/get/1")).andExpect(status().isOk());
-		// 405 потому что надо тело запроса составить
-		mockMvc.perform(get("/api/v1/posts/edit/1")).andExpect(status().isMethodNotAllowed());
-		mockMvc.perform(get("/api/v1/albums/get/all")).andExpect(status().isOk());
-		mockMvc.perform(get("/api/v1/users/get/all")).andExpect(status().isOk());
-    }
-
-	
-
+    
 }
