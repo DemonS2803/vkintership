@@ -14,6 +14,7 @@ spring:
 
 
   datasource:
+  # подключение к БД
     url: jdbc:postgresql://localhost:5432/vkinternship
     username: postgres
     password: postgres
