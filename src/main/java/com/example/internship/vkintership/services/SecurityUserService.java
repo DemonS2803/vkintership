@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.example.internship.vkintership.entities.User;
@@ -16,6 +17,7 @@ public class SecurityUserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Cacheable(value = "security_users")
     public User getUserByLogin(String login) {
         return userRepository.findUserByLogin(login);
     }
@@ -32,6 +34,8 @@ public class SecurityUserService {
         return user;
     }
 
+
+    @Cacheable(value = "security_users")
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
