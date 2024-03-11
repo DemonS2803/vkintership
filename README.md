@@ -8,3 +8,19 @@
 
 Для логина надо отправить запрос POST на /api/v1/auth/login 
 c телом { "login": "admin", "password": "password" }
+полученный токен вставить в Header Authorization
+Пример запроса для пользователя admin
+http://localhost:8080/api/v1/users/get/all
+
+Управление пользователями - /api/v1/auth/admin/users
+пример тела запроса для создание пользователя
+{
+    "login": "newUSer",
+    "password": "password",
+    "authorities": [
+        "ROLE_POSTS_VIEWER",
+        "ROLE_POSTS_EDITOR",
+        "ROLE_ALBUMS_EDITOR",
+        "ROLE_ALBUMS_VIEWER"
+    ]
+}
