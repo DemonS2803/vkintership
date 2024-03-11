@@ -27,3 +27,5 @@ http://localhost:8080/api/v1/users/get/all
         "ROLE_ALBUMS_VIEWER"
     ]
 }
+
+audit пишется в бд (таблица security_audit)
